@@ -13,6 +13,7 @@ $VLANFile = Import-Csv $InputFile
 
 Connect-VIServer -Server $Vcenter
 
+#Create new standard switch on all hypervisors
 ForEach ($VMHost in $VMHosts) {
     New-VirtualSwitch -VMHost $VMHost -Name vSwitch1
 }
@@ -21,7 +22,7 @@ ForEach ($VMHost in $VMHosts) {
 ForEach ($VLAN in $VLANFile) {
 	$VLAN_name = $VLAN.VLANname
 	$VLAN_number = $VLAN.VLANid
-    
+   
 	$VMHosts = Get-Cluster $Cluster | Get-VMHost | sort Name | % {$_.Name}
 
 	ForEach ($VMHost in $VMHosts) {
