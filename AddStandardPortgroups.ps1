@@ -27,7 +27,7 @@ ForEach ($VLAN in $VLANFile) {
 
 	ForEach ($VMHost in $VMHosts) {
 		Get-VirtualSwitch -VMHost $VMHost -Name "vSwitch1" | New-VirtualPortGroup -Name $VLAN_name -VLANid $VLAN_number
-		}
+	}
 }
 
 Disconnect-VIServer -server $Vcenter -Confirm:$false
